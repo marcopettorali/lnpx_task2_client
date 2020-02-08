@@ -26,7 +26,7 @@ public class Article {
     public String Country;
     public String Region;
     public String City;
-    public  Map<String, Integer> keyWordAnalysis; //pensa a come trasformare la keyword doc in un Map
+    public Map<String, Integer> keyWordAnalysis; //pensa a come trasformare la keyword doc in un Map
     
     public Document toJSON() {
         Document docArticle = new Document("Title", this.Title).append("Link", this.Link).append("Topic", this.Topic).append("Newspaper", this.Newspaper).append("Text", this.Text).append("date", this.Date);

@@ -18,125 +18,115 @@ import lnpx.messages.ClientsResponseMsg;
 
 public class AdminPaneGUI extends AnchorPane {
 
-    protected  Separator separator;
-    protected  Separator separator0;
-    protected  Label infouserLabel;
-    protected  UserOverviewTable infoUserTable;
-    protected  Label IntroLabel;
-    protected  Label SitesLabel;
-    protected  CheckBox OptionRepubblica;
-    protected  CheckBox OptionAnsa;
-    protected  CheckBox OptionCorriere;
-    protected  CheckBox OptionSky;
-    protected  Button UpdateSitesButton;
-    protected  Label ScrapePeriodLabel;
-    protected  TextField ScrapePeriodTextField;
-    protected  Label minuteLabel;
-    protected  Button ScrapePeriodButton;
-    protected  Button ScrapeNowButton;
-    protected  Label ErrorScrapePeriod;
-    protected  Label ErrorSites;
+    protected Separator separator;
+    protected Separator separator0;
+    protected Label infouserLabel;
+    protected UserOverviewTable infoUserTable;
+    protected Label IntroLabel;
+    protected Label SitesLabel;
+    protected CheckBox OptionRepubblica;
+    protected CheckBox OptionAnsa;
+    protected CheckBox OptionCorriere;
+    protected CheckBox OptionSky;
+    protected Button UpdateSitesButton;
+    protected Label ScrapePeriodLabel;
+    protected TextField ScrapePeriodTextField;
+    protected Label minuteLabel;
+    protected Button ScrapePeriodButton;
+    protected Button ScrapeNowButton;
+    protected Label ErrorScrapePeriod;
+    protected Label ErrorSites;
 
-    
-    private void buildUpdateSitesButton(){
-        
+    private void buildUpdateSitesButton() {
+
         UpdateSitesButton.setLayoutX(547.0);
         UpdateSitesButton.setLayoutY(240.0);
         UpdateSitesButton.setMnemonicParsing(false);
         UpdateSitesButton.setPrefHeight(25.0);
         UpdateSitesButton.setPrefWidth(98.0);
         UpdateSitesButton.setText("Apply");
-        
-        
-        UpdateSitesButton.setOnAction( e ->{
-          
-        boolean rep = OptionRepubblica.isSelected();
-        boolean ansa = OptionAnsa.isSelected();
-        boolean corr = OptionCorriere.isSelected();
-        boolean sky = OptionSky.isSelected();
-            
-        if(rep || ansa || corr || sky){
-            
+
+        UpdateSitesButton.setOnAction(e -> {
+
+            boolean rep = OptionRepubblica.isSelected();
+            boolean ansa = OptionAnsa.isSelected();
+            boolean corr = OptionCorriere.isSelected();
+            boolean sky = OptionSky.isSelected();
+
+            if (rep || ansa || corr || sky) {
+
                 ErrorSites.setText("");
-                Map<String,Boolean> sites = new HashMap<>();
-                sites.put("Repubblica",rep);
+                Map<String, Boolean> sites = new HashMap<>();
+                sites.put("Repubblica", rep);
                 sites.put("Ansa", ansa);
-                sites.put("Corriere",corr);
+                sites.put("Corriere", corr);
                 sites.put("SkyTG24", sky);
 
                 MainClass.sendSites(sites);
-            
-        }
-        else{
-                
+
+            } else {
+
                 ErrorSites.setText("Please, select at least one site for the scrape !");
-                
+
             }
-                 
+
         });
-        
-        
-        
+
     }
-    
-    private void buildScrapeNowButton(){
-        
+
+    private void buildScrapeNowButton() {
+
         ScrapeNowButton.setLayoutX(426.0);
         ScrapeNowButton.setLayoutY(386.0);
         ScrapeNowButton.setMnemonicParsing(false);
         ScrapeNowButton.setPrefHeight(48.0);
         ScrapeNowButton.setPrefWidth(186.0);
         ScrapeNowButton.setText("SCRAPE NOW");
-        
+
         ScrapeNowButton.setOnAction(e -> {
-            
+
             MainClass.scrapeNow();
-            
+
         });
-        
-        
+
     }
-    
-    private void buildScrapePeriodButton(){
-        
+
+    private void buildScrapePeriodButton() {
+
         ScrapePeriodButton.setLayoutX(121.0);
         ScrapePeriodButton.setLayoutY(418.0);
         ScrapePeriodButton.setMnemonicParsing(false);
         ScrapePeriodButton.setPrefHeight(25.0);
         ScrapePeriodButton.setPrefWidth(98.0);
         ScrapePeriodButton.setText("Update");
-        
-        ScrapePeriodButton.setOnAction( e -> {
-            
+
+        ScrapePeriodButton.setOnAction(e -> {
+
             String period = ScrapePeriodTextField.getText();
-            
-            if(period.equals("")){
-                
+
+            if (period.equals("")) {
+
                 ErrorScrapePeriod.setText("Please, specify the scrape period !");
-                
+
+            } else {
+
+                ErrorScrapePeriod.setText("");
+                double p = Double.parseDouble(period);
+                MainClass.sendScrapePeriod(p);
             }
-            else{
-               
-               ErrorScrapePeriod.setText(""); 
-               double p = Double.parseDouble(period);
-               MainClass.sendScrapePeriod(p);
-            }
-                
+
         });
-        
-        
-        
+
     }
-    
-    private void initializationPane(){
-        
-        ClientsResponseMsg usersList=MainClass.requestUsersList();
+
+    private void initializationPane() {
+
+        ClientsResponseMsg usersList = MainClass.requestUsersList();
         List<User> list = usersList.getClients();
         infoUserTable.setItems(list);
-              
+
     }
-    
-    
+
     public AdminPaneGUI() {
 
         separator = new Separator();
@@ -166,7 +156,7 @@ public class AdminPaneGUI extends AnchorPane {
         buildScrapeNowButton();
         buildScrapePeriodButton();
         initializationPane();
-        
+
         separator.setLayoutX(346.0);
         separator.setLayoutY(28.0);
         separator.setOrientation(javafx.geometry.Orientation.VERTICAL);
@@ -203,14 +193,14 @@ public class AdminPaneGUI extends AnchorPane {
         SitesLabel.setPrefWidth(148.0);
         SitesLabel.setText("Select newspaper's site:");
         SitesLabel.setFont(new Font("System Bold", 12.0));
-        
+
         ErrorScrapePeriod.setLayoutX(88);
         ErrorScrapePeriod.setLayoutY(390);
         ErrorScrapePeriod.setPrefHeight(17.0);
         ErrorScrapePeriod.setPrefWidth(148.0);
         ErrorScrapePeriod.setText("");
         ErrorScrapePeriod.setTextFill(Color.RED);
-        
+
         ErrorSites.setLayoutX(363);
         ErrorSites.setLayoutY(209);
         ErrorSites.setPrefHeight(17.0);
@@ -240,8 +230,6 @@ public class AdminPaneGUI extends AnchorPane {
         OptionSky.setMnemonicParsing(false);
         OptionSky.setText("SkyTG24.it");
 
-        
-
         ScrapePeriodLabel.setLayoutX(33.0);
         ScrapePeriodLabel.setLayoutY(369.0);
         ScrapePeriodLabel.setPrefHeight(17.0);
@@ -259,10 +247,6 @@ public class AdminPaneGUI extends AnchorPane {
         minuteLabel.setPrefHeight(17.0);
         minuteLabel.setPrefWidth(44.0);
         minuteLabel.setText("minute");
-
-        
-
-        
 
         getChildren().add(separator);
         getChildren().add(separator0);
