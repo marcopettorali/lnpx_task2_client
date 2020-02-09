@@ -190,7 +190,7 @@ public class SignInPaneGUI extends AnchorPane {
         UsernameLabel.setPrefWidth(72.0);
         UsernameLabel.setText("Username :");
 
-        PasswordText.setLayoutX(98.0);
+        PasswordText.setLayoutX(124);
         PasswordText.setLayoutY(340.0);
 
         PasswordLabel.setLayoutX(16.0);
@@ -205,7 +205,7 @@ public class SignInPaneGUI extends AnchorPane {
         FirstNameLabel.setPrefWidth(72.0);
         FirstNameLabel.setText("First Name :");
 
-        FirstNameText.setLayoutX(107.0);
+        FirstNameText.setLayoutX(124);
         FirstNameText.setLayoutY(80.0);
 
         LastNameLabel.setLayoutX(19.0);
@@ -214,7 +214,7 @@ public class SignInPaneGUI extends AnchorPane {
         LastNameLabel.setPrefWidth(72.0);
         LastNameLabel.setText("Last Name :");
 
-        LastNameText.setLayoutX(107.0);
+        LastNameText.setLayoutX(124);
         LastNameText.setLayoutY(133.0);
 
         DateLabel.setLayoutX(19.0);
@@ -223,10 +223,10 @@ public class SignInPaneGUI extends AnchorPane {
         DateLabel.setPrefWidth(79.0);
         DateLabel.setText("Date of birth :");
 
-        DateText.setLayoutX(107.0);
+        DateText.setLayoutX(124);
         DateText.setLayoutY(189.0);
 
-        UsernameText.setLayoutX(91.0);
+        UsernameText.setLayoutX(124);
         UsernameText.setLayoutY(282.0);
 
         RepeatLabel.setLayoutX(20.0);
@@ -259,7 +259,7 @@ public class SignInPaneGUI extends AnchorPane {
         EmailLabel.setPrefWidth(48.0);
         EmailLabel.setText("Email : ");
 
-        EmailText.setLayoutX(82.0);
+        EmailText.setLayoutX(124);
         EmailText.setLayoutY(235.0);
 
         buildSignInButton();
@@ -268,16 +268,18 @@ public class SignInPaneGUI extends AnchorPane {
         getChildren().add(label);
         getChildren().add(separator);
         getChildren().add(separator0);
-        getChildren().add(UsernameLabel);
-        getChildren().add(PasswordText);
-        getChildren().add(PasswordLabel);
         getChildren().add(FirstNameLabel);
         getChildren().add(FirstNameText);
         getChildren().add(LastNameLabel);
         getChildren().add(LastNameText);
         getChildren().add(DateLabel);
         getChildren().add(DateText);
+        getChildren().add(EmailLabel);
+        getChildren().add(EmailText);
+        getChildren().add(UsernameLabel);
         getChildren().add(UsernameText);
+        getChildren().add(PasswordText);
+        getChildren().add(PasswordLabel); 
         getChildren().add(RepeatLabel);
         getChildren().add(RepeatText);
         getChildren().add(ErrorLabel);
@@ -285,8 +287,7 @@ public class SignInPaneGUI extends AnchorPane {
         getChildren().add(BackToLoginButton);
         getChildren().add(separator1);
         getChildren().add(separator2);
-        getChildren().add(EmailLabel);
-        getChildren().add(EmailText);
+        
 
     }
 }
