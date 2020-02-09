@@ -22,6 +22,10 @@ public class LoginPaneGUI extends AnchorPane {
     
     public static void updateLoginPane(int res){
         
+        if (res == 0){
+            MainClass.loadMainForm();
+        }
+        
         if (res == -1) {
                 errorLabel.setText("Username or password not valid");
             }

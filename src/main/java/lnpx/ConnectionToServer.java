@@ -42,13 +42,11 @@ public abstract class ConnectionToServer {
     public static void loginToServer(LoginMsg msg){
         
         String handshake = "LOGIN";
-        
-        //we are sending the string used to communicate to the receiver the beginning of the login phase
         try{
+            //we are sending the string used to communicate to the receiver the beginning of the login phase
             dos.writeUTF(handshake);
             // we are sending to the receiver our credentials   
             oos.writeObject(msg);
-            System.out.println("i'm here");
         }catch(IOException io){
             System.out.println(io.getMessage());
         }

@@ -29,7 +29,11 @@ public class MainClass extends Application {
         LoginStage.show();
 
     }
-
+    
+    public static void loadMainForm(){
+        loadMainStage();
+    }
+    
     private static void loadMainStage() {
 
         SignUpStage.close();
@@ -141,6 +145,7 @@ public class MainClass extends Application {
     public static void login(String username, String password) {
         
         LoginMsg msg = new LoginMsg(username,password);
+        System.out.println("STEP 1");
         ConnectionToServer.loginToServer(msg);
         
     }

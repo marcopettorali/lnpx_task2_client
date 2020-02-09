@@ -256,6 +256,10 @@ public class UserPaneGUI extends AnchorPane {
         CountryBar = new TextField();
         NewspaperLabel = new Label();
         NewspaperBar = new TextField();
+        RegionLabel = new Label();
+        RegionBar = new TextField();
+        CityLabel = new Label();
+        CityBar = new TextField();
         AuthorLabel = new Label();
         AuthorBar = new TextField();
         ErrorLabel = new Label();
@@ -309,11 +313,11 @@ public class UserPaneGUI extends AnchorPane {
 
         RegionLabel.setPrefHeight(17.0);
         RegionLabel.setPrefWidth(50.0);
-        RegionLabel.setText("Country");
+        RegionLabel.setText("Region");
         
         CityLabel.setPrefHeight(17.0);
         CityLabel.setPrefWidth(50.0);
-        CityLabel.setText("Country");
+        CityLabel.setText("City");
         
         NewspaperLabel.setPrefHeight(17.0);
         NewspaperLabel.setPrefWidth(82.0);
@@ -329,7 +333,7 @@ public class UserPaneGUI extends AnchorPane {
         
 
         separator.setLayoutX(3.0);
-        separator.setLayoutY(258.0);
+        separator.setLayoutY(265.0);
         separator.setPrefHeight(6.0);
         separator.setPrefWidth(236.0);
 
