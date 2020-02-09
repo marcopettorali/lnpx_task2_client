@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.application.Platform;
@@ -81,7 +82,7 @@ public class MessageReceiver extends Thread {
         }catch(ClassNotFoundException cfe){
                 System.out.println(cfe.getMessage());
             }
-        final Map<String,Integer> map = res.getTrendingKeywords();
+        final LinkedHashMap<String,Long> map = res.getTrendingKeywords();
         Platform.runLater(() -> (UserPaneGUI.addTrendingKeywords(map)));
                
     }

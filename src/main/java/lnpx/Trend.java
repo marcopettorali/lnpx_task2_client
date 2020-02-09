@@ -3,9 +3,9 @@ package lnpx;
 public class Trend {
 
     private String word;
-    private int value;
+    private Long value;
 
-    public Trend(String word, int value) {
+    public Trend(String word, Long value) {
         this.word = word;
         this.value = value;
     }
@@ -14,7 +14,7 @@ public class Trend {
         return word;
     }
 
-    public int getValue() {
+    public Long getValue() {
         return value;
     }
 

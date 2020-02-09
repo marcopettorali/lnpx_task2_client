@@ -74,13 +74,13 @@ public class UserPaneGUI extends AnchorPane {
         
     }
     
-    public static void addTrendingKeywords(Map<String,Integer> trendMap){
+    public static void addTrendingKeywords(LinkedHashMap<String,Long> trendMap){
         
         List<Trend> trKey = new ArrayList<>();
-        for(Map.Entry<String,Integer>entry : trendMap.entrySet()){
+        for(Map.Entry<String,Long>entry : trendMap.entrySet()){
                         
                         String key = entry.getKey();
-                        int value = entry.getValue();
+                        Long value = entry.getValue();
                         Trend t = new Trend(key,value);
                         trKey.add(t);
                         
@@ -92,7 +92,7 @@ public class UserPaneGUI extends AnchorPane {
         for(int i=0;i<trKey.size();i++){
             
             String word = trKey.get(i).getWord();
-            int value = trKey.get(i).getValue();
+            Long value = trKey.get(i).getValue();
             content.add(new PieChart.Data(word,value));
             
         }
