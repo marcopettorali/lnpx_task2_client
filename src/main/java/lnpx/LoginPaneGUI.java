@@ -7,18 +7,31 @@ import javafx.scene.paint.Color;
 
 public class LoginPaneGUI extends AnchorPane {
 
-    private VBox loginVBox;
-    private Label usernameLabel;
-    private TextField usernameTextField;
-    private Label passwordLabel;
-    private PasswordField passwordTextField;
-    private TextField visiblePasswordTextField;
-    private CheckBox showPasswordCheckBox;
-    private Button loginButton;
-    private Label errorLabel;
-    private Label orLabel;
-    private Button signupButton;
-
+    private static VBox loginVBox;
+    private static Label usernameLabel;
+    private static TextField usernameTextField;
+    private static Label passwordLabel;
+    private static PasswordField passwordTextField;
+    private static TextField visiblePasswordTextField;
+    private static CheckBox showPasswordCheckBox;
+    private static Button loginButton;
+    private static Label errorLabel;
+    private static Label orLabel;
+    private static Button signupButton;
+    
+    
+    public static void updateLoginPane(int res){
+        
+        if (res == -1) {
+                errorLabel.setText("Username or password not valid");
+            }
+        if (res == -2) {
+                errorLabel.setText("Username or password not valid");
+            }
+        
+    } 
+            
+            
     public void buildLoginButton() {
         loginButton = new Button();
         loginButton.setId("loginButton");
@@ -26,15 +39,8 @@ public class LoginPaneGUI extends AnchorPane {
         loginButton.setText("LOGIN");
         VBox.setMargin(loginButton, new Insets(10.0, 0.0, 0.0, 0.0)); 
         loginButton.setOnAction(e -> {
-            int res = MainClass.login(usernameTextField.getText(), passwordTextField.getText());
-            if (res == -1) {
-                errorLabel.setText("Username or password not valid");
-            }
-            if (res == -2) {
-                errorLabel.setText("Username or password not valid");
-            }
-          
-            
+            MainClass.login(usernameTextField.getText(), passwordTextField.getText());
+                     
         });
 
     }

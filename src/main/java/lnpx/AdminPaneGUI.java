@@ -18,25 +18,32 @@ import lnpx.messages.ClientsResponseMsg;
 
 public class AdminPaneGUI extends AnchorPane {
 
-    protected Separator separator;
-    protected Separator separator0;
-    protected Label infouserLabel;
-    protected UserOverviewTable infoUserTable;
-    protected Label IntroLabel;
-    protected Label SitesLabel;
-    protected CheckBox OptionRepubblica;
-    protected CheckBox OptionAnsa;
-    protected CheckBox OptionCorriere;
-    protected CheckBox OptionSky;
-    protected Button UpdateSitesButton;
-    protected Label ScrapePeriodLabel;
-    protected TextField ScrapePeriodTextField;
-    protected Label minuteLabel;
-    protected Button ScrapePeriodButton;
-    protected Button ScrapeNowButton;
-    protected Label ErrorScrapePeriod;
-    protected Label ErrorSites;
-
+    protected static Separator separator;
+    protected static Separator separator0;
+    protected static Label infouserLabel;
+    protected static UserOverviewTable infoUserTable;
+    protected static Label IntroLabel;
+    protected static Label SitesLabel;
+    protected static CheckBox OptionRepubblica;
+    protected static CheckBox OptionAnsa;
+    protected static CheckBox OptionCorriere;
+    protected static CheckBox OptionSky;
+    protected static Button UpdateSitesButton;
+    protected static Label ScrapePeriodLabel;
+    protected static TextField ScrapePeriodTextField;
+    protected static Label minuteLabel;
+    protected static Button ScrapePeriodButton;
+    protected static Button ScrapeNowButton;
+    protected static Label ErrorScrapePeriod;
+    protected static Label ErrorSites;
+    
+    public static void addUsersList(List<User> list){
+        
+        infoUserTable.setItems(list);
+        
+    }
+    
+    
     private void buildUpdateSitesButton() {
 
         UpdateSitesButton.setLayoutX(547.0);
@@ -121,9 +128,8 @@ public class AdminPaneGUI extends AnchorPane {
 
     private void initializationPane() {
 
-        ClientsResponseMsg usersList = MainClass.requestUsersList();
-        List<User> list = usersList.getClients();
-        infoUserTable.setItems(list);
+        MainClass.requestUsersList();
+
 
     }
 

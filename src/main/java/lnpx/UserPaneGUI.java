@@ -23,37 +23,83 @@ import lnpx.messages.*;
 
 public class UserPaneGUI extends AnchorPane {
 
-    protected  VBox vBox;
-    protected  Label Search;
-    protected  TextField SearchBar;
-    protected  Label Filters;
-    protected  Label NewspaperLabel;
-    protected  TextField NewspaperBar;
-    protected  Label AuthorLabel;
-    protected  TextField AuthorBar;
-    protected  Label CountryLabel;
-    protected  TextField CountryBar;
-    protected  Label RegionLabel;
-    protected  TextField RegionBar;
-    protected  Label CityLabel;
-    protected  TextField CityBar;
-    protected  Label ErrorLabel;
-    protected  Button SearchButton;
-    protected  Separator separator;
-    protected  Separator separator0;
-    protected  Label RecommendedLabel;
-    protected  ArticlesTable RecommendedTable;
-    protected  Label TrendingLabel;
-    protected  TrendingKeywordsTable TrendingTable;
-    protected  Label ChartLabel;
-    protected  PieChart PieChart;
-    protected  Label ResultLabel;
-    protected  ArticlesTable ResultTable;
-    protected  Label ArticleoverLabel;
-    protected  ArticleOverviewTable SingleArticleTable;
-    protected  ObservableList<PieChart.Data> PieChartData;
-    protected  Map<String,String> LastUsedFilter;
+    protected static VBox vBox;
+    protected static Label Search;
+    protected static TextField SearchBar;
+    protected static Label Filters;
+    protected static Label NewspaperLabel;
+    protected static TextField NewspaperBar;
+    protected static Label AuthorLabel;
+    protected static TextField AuthorBar;
+    protected static Label CountryLabel;
+    protected static TextField CountryBar;
+    protected static Label RegionLabel;
+    protected static TextField RegionBar;
+    protected static Label CityLabel;
+    protected static TextField CityBar;
+    protected static Label ErrorLabel;
+    protected static Button SearchButton;
+    protected static Separator separator;
+    protected static Separator separator0;
+    protected static Label RecommendedLabel;
+    protected static ArticlesTable RecommendedTable;
+    protected static Label TrendingLabel;
+    protected static TrendingKeywordsTable TrendingTable;
+    protected static Label ChartLabel;
+    protected static PieChart PieChart;
+    protected static Label ResultLabel;
+    protected static ArticlesTable ResultTable;
+    protected static Label ArticleoverLabel;
+    protected static ArticleOverviewTable SingleArticleTable;
+    protected static ObservableList<PieChart.Data> PieChartData;
+    protected static Map<String,String> LastUsedFilter;
 
+    
+    public static void addSearchResults(List<Article> list){
+        
+        if(!ResultTable.isVisible()){
+                    ResultTable.setVisible(true);
+                    ResultLabel.setVisible(true);
+                }
+                ResultTable.setItems(list);
+                if(list.isEmpty()){
+                    ErrorLabel.setText("No articles were found, please check the keyword inserted!");
+                }
+        
+    }
+    
+    public static void addRecommendedResults(List<Article> list){
+        
+        RecommendedTable.setItems(list);
+        
+    }
+    
+    public static void addTrendingKeywords(Map<String,Integer> trendMap){
+        
+        List<Trend> trKey = new ArrayList<>();
+        for(Map.Entry<String,Integer>entry : trendMap.entrySet()){
+                        
+                        String key = entry.getKey();
+                        int value = entry.getValue();
+                        Trend t = new Trend(key,value);
+                        trKey.add(t);
+                        
+                    }
+        TrendingTable.setItems(trKey);
+        
+        PieChartData=FXCollections.observableArrayList();
+        List<PieChart.Data> content = new ArrayList<>();
+        for(int i=0;i<trKey.size();i++){
+            
+            String word = trKey.get(i).getWord();
+            int value = trKey.get(i).getValue();
+            content.add(new PieChart.Data(word,value));
+            
+        }
+        PieChartData.addAll(content);
+              
+    }
+    
     
     private void buildSearchButton(){
         
@@ -82,18 +128,9 @@ public class UserPaneGUI extends AnchorPane {
                 filt.put("Region",region);
                 filt.put("City",city);
                 LastUsedFilter = filt;
-                ArticlesResponseMsg result = MainClass.searchContent(keyword,filt);
-                List<Article> articlesExtracted = result.getArticles();
-                if(!ResultTable.isVisible()){
-                    ResultTable.setVisible(true);
-                    ResultLabel.setVisible(true);
-                }
-                ResultTable.setItems(articlesExtracted);
-                if(articlesExtracted.isEmpty()){
-                    ErrorLabel.setText("No articles were found, please check the keyword inserted!");
-                }
                 
-                
+                MainClass.searchContent(keyword,filt);
+                              
             }
              
         });
@@ -102,32 +139,8 @@ public class UserPaneGUI extends AnchorPane {
     
     private void initializationPane(){
         
-        TrendResponseMsg trendingKeywords=MainClass.requestTrendingKeywords();
-        List<Trend> trKey = new ArrayList<>();
-        for(Map.Entry<String,Integer>entry : trendingKeywords.getTrendingKeywords().entrySet()){
-                        
-                        String key = entry.getKey();
-                        int value = entry.getValue();
-                        Trend t = new Trend(key,value);
-                        trKey.add(t);
-                        
-                    }
-        TrendingTable.setItems(trKey);
-        
-        PieChartData=FXCollections.observableArrayList();
-        List<PieChart.Data> content = new ArrayList<>();
-        for(int i=0;i<trKey.size();i++){
-            
-            String word = trKey.get(i).getWord();
-            int value = trKey.get(i).getValue();
-            content.add(new PieChart.Data(word,value));
-            
-        }
-        PieChartData.addAll(content);
-        
-        ArticlesResponseMsg recommended=MainClass.requestRecommendedArticles();
-        List<Article> RecommendedList = recommended.getArticles();
-        RecommendedTable.setItems(RecommendedList);
+        MainClass.requestTrendingKeywords();       
+        MainClass.requestRecommendedArticles();
            
     }
     

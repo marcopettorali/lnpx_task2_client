@@ -15,29 +15,52 @@ import javafx.scene.text.Font;
 
 public class SignInPaneGUI extends AnchorPane {
 
-    protected final Label label;
-    protected final Separator separator;
-    protected final Separator separator0;
-    protected final Label UsernameLabel;
-    protected final TextField PasswordText;
-    protected final Label PasswordLabel;
-    protected final Label FirstNameLabel;
-    protected final TextField FirstNameText;
-    protected final Label LastNameLabel;
-    protected final TextField LastNameText;
-    protected final Label DateLabel;
-    protected final TextField DateText;
-    protected final TextField UsernameText;
-    protected final Label RepeatLabel;
-    protected final TextField RepeatText;
-    protected final Label ErrorLabel;
-    protected final Button SignInButton;
-    protected final Button BackToLoginButton;
-    protected final Separator separator1;
-    protected final Separator separator2;
-    protected final Label EmailLabel;
-    protected final TextField EmailText;
+    protected static Label label;
+    protected static Separator separator;
+    protected static Separator separator0;
+    protected static Label UsernameLabel;
+    protected static TextField PasswordText;
+    protected static Label PasswordLabel;
+    protected static Label FirstNameLabel;
+    protected static TextField FirstNameText;
+    protected static Label LastNameLabel;
+    protected static TextField LastNameText;
+    protected static Label DateLabel;
+    protected static TextField DateText;
+    protected static TextField UsernameText;
+    protected static Label RepeatLabel;
+    protected static TextField RepeatText;
+    protected static Label ErrorLabel;
+    protected static Button SignInButton;
+    protected static Button BackToLoginButton;
+    protected static Separator separator1;
+    protected static Separator separator2;
+    protected static Label EmailLabel;
+    protected static TextField EmailText;
 
+    public static void updateSignInPane(int result){
+        
+        if( result == 0 ){
+            ErrorLabel.setText("Registration successfully completed");
+            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#4314ff"));
+            
+        }
+        if( result == -1){
+            ErrorLabel.setText("Username already exists");
+            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));   
+        }
+        if(result == -2){
+            ErrorLabel.setText("An error has occurred during the communication with the server !");
+            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));
+            
+        }
+        
+           
+    }
+    
+    
+    
+    
     public void buildSignInButton(){
         
         SignInButton.setLayoutX(82.0);
@@ -91,24 +114,9 @@ public class SignInPaneGUI extends AnchorPane {
             return;
             }
         
-        int result=MainClass.signIn(UserString,PasswordString,EmailString,FNString,LNString,birth);
-        
-        if( result == 0 ){
-            ErrorLabel.setText("Registration successfully completed");
-            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#4314ff"));
-            
-        }
-        if( result == -1){
-            ErrorLabel.setText("Username already exists");
-            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));   
-        }
-        if(result == -2){
-            ErrorLabel.setText("An error has occurred during the communication with the server !");
-            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));
-            
-        }
+        MainClass.signIn(UserString,PasswordString,EmailString,FNString,LNString,birth);
       
-      });  
+        });  
         
     }
     
