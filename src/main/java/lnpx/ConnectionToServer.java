@@ -18,6 +18,7 @@ public abstract class ConnectionToServer {
     private static Socket socket;
     private static MessageReceiver receiver;
     private static ObjectOutputStream oos;
+    private static DataOutputStream dos;
     
     private static String ipAddress = "localhost";
     private static int port = 7799;
@@ -27,6 +28,7 @@ public abstract class ConnectionToServer {
         try{
             socket = new Socket(ipAddress,port);
             oos = new ObjectOutputStream(socket.getOutputStream());
+            dos = new DataOutputStream(socket.getOutputStream());
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -40,11 +42,13 @@ public abstract class ConnectionToServer {
     public static void loginToServer(LoginMsg msg){
         
         String handshake = "LOGIN";
+        
         //we are sending the string used to communicate to the receiver the beginning of the login phase
         try{
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             // we are sending to the receiver our credentials   
             oos.writeObject(msg);
+            System.out.println("i'm here");
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -55,7 +59,7 @@ public abstract class ConnectionToServer {
         String handshake = "SIGN_IN";
         try{
             //we are sending the string used to communicate to the receiver the beginning of the signin phase
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             // we are sending to the receiver our credentials   
             oos.writeObject(msg);
         }catch(IOException io){
@@ -69,7 +73,7 @@ public abstract class ConnectionToServer {
         String handshake = "FIND";
         try{
             //we are sending the string used to communicate to the receiver the beginning of searching phase
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             //Now we will send the object containing the keyword and the selected filters
             oos.writeObject(msg);
                 
@@ -83,7 +87,7 @@ public abstract class ConnectionToServer {
         
         String handshake = "TREND";
         try{
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -94,7 +98,7 @@ public abstract class ConnectionToServer {
         
         String handshake = "RECOMMENDED";
         try{
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -106,7 +110,7 @@ public abstract class ConnectionToServer {
         String handshake = "VIEW";
         try{
             //we are sending the string used to communicate to the receiver the sending of the viewedMessage keywords
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             //sended the viewMessage
             oos.writeObject(view);
         }catch(IOException io){
@@ -120,7 +124,7 @@ public abstract class ConnectionToServer {
         String handshake = "CHANGE_SITES";
         try{
             //we are sending the string used to communicate to the receiver the sending of the list of Scraped sites
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             //now the clients send the list of selected scraping sites
             oos.writeObject(msg);
         }catch(IOException io){
@@ -133,7 +137,7 @@ public abstract class ConnectionToServer {
         
         String handshake = "SCRAPE_NOW";
         try{
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -145,7 +149,7 @@ public abstract class ConnectionToServer {
         String handshake = "CHANGE_PERIOD";
         try{
             //we are sending the string used to communicate to the receiver the sending of the new scrape period
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
             //now the client sends the new scrape period using ChangePeriodMsg
             oos.writeObject(msg);
         }catch(IOException io){
@@ -159,7 +163,7 @@ public abstract class ConnectionToServer {
          String handshake = "CLIENTS";
          try{
              //we are sending the string used to communicate to the receiver the request of users list
-            oos.writeObject(handshake);
+            dos.writeUTF(handshake);
          }catch(IOException io){
             System.out.println(io.getMessage());
         }

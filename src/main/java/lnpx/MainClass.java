@@ -149,7 +149,7 @@ public class MainClass extends Application {
 
         SignInMsg sign = new SignInMsg(user, fn, ln, d, email, pwd, false);
         ConnectionToServer.signInToServer(sign);
-        System.out.println("prova");
+        
     }
 
     @Override

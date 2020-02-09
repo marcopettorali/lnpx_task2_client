@@ -5,6 +5,7 @@
  */
 package lnpx;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -22,6 +23,7 @@ public class MessageReceiver extends Thread {
    
     private boolean endExecution;
     private ObjectInputStream ois;
+    private DataInputStream dis;
     private Socket socket;
     
     public MessageReceiver(Socket sock){
@@ -30,6 +32,7 @@ public class MessageReceiver extends Thread {
         endExecution = false;
         try{
             ois = new ObjectInputStream(sock.getInputStream());
+            dis = new DataInputStream(sock.getInputStream());
         }catch(IOException io){
             System.out.println(io.getMessage());
         }
@@ -164,11 +167,9 @@ public class MessageReceiver extends Thread {
         while(!endExecution){
             
             try{
-                command = (String)ois.readObject();
+                command = dis.readUTF();
             }catch(IOException io){
                 System.out.println(io.getMessage());
-            }catch(ClassNotFoundException cfe){
-                System.out.println(cfe.getMessage());
             }
             
             switch(command){
