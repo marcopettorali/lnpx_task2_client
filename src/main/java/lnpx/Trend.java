@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package lnpx.messages;
+package lnpx;
 
-/**
- *
- * @author rnoce
- */
 public class Trend {
-    
+
     private String word;
     private int value;
 
@@ -26,7 +17,5 @@ public class Trend {
     public int getValue() {
         return value;
     }
-    
-    
-    
+
 }

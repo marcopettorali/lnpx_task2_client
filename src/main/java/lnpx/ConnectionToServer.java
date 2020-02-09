@@ -19,10 +19,13 @@ public abstract class ConnectionToServer {
     private static MessageReceiver receiver;
     private static ObjectOutputStream oos;
     
+    private static String ipAddress = "localhost";
+    private static int port = 7799;
+    
     public static void createConnection(){
         
         try{
-            socket = new Socket("localhost",7799);
+            socket = new Socket(ipAddress,port);
             oos = new ObjectOutputStream(socket.getOutputStream());
         }catch(IOException io){
             System.out.println(io.getMessage());

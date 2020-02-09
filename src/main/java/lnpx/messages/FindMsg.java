@@ -1,35 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lnpx.messages;
 
-import java.util.Map;
-import lnpx.*;
+import java.io.Serializable;
+import java.util.*;
 
-/**
- *
- * @author rnoce
- */
-public class FindMsg {
-    
-    private String Keyword;
-    private Map<String,String> SelectedFilters;
+public class FindMsg implements Serializable{
 
-    public FindMsg(String Keyword, Map<String,String> SelectedFilters) {
-        this.Keyword = Keyword;
-        this.SelectedFilters = SelectedFilters;
+    private String keyword;
+    private Map<String, String> filters;
+
+    public FindMsg(String keyword, Map<String, String> filters) {
+        this.keyword = keyword;
+        this.filters = filters;
     }
 
     public String getKeyword() {
-        return Keyword;
+        return keyword;
     }
 
-    public Map<String,String> getSelectedFilters() {
-        return SelectedFilters;
+    public Map<String, String> getFilters() {
+        return filters;
     }
-    
-    
     
 }

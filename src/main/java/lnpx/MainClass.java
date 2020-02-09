@@ -146,10 +146,10 @@ public class MainClass extends Application {
     }
     
     public static void signIn(String user, String pwd, String email, String fn, String ln, Date d) {
-        
-        SignInMsg sign = new SignInMsg(user, pwd, email, fn, ln, d);
-        ConnectionToServer.signInToServer(sign);
 
+        SignInMsg sign = new SignInMsg(user, fn, ln, d, email, pwd, false);
+        ConnectionToServer.signInToServer(sign);
+        System.out.println("prova");
     }
 
     @Override

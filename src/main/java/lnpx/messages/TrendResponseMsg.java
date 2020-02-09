@@ -1,21 +1,17 @@
 package lnpx.messages;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TrendResponseMsg implements Serializable {
 
-    private Map<String,Integer> TrendingKeywords;
+    private Map<String, Integer> trendingKeyWords;
 
-    public TrendResponseMsg(Map<String,Integer> tk) {
-        this.TrendingKeywords=tk;
+    public TrendResponseMsg(Map<String, Integer> trendingKeywords) {
+        this.trendingKeyWords = trendingKeywords;
     }
 
-    public Map<String,Integer> getTrendingKeywords() {
-        return TrendingKeywords;
+    public Map<String, Integer> getTrendingKeywords() {
+        return trendingKeyWords;
     }
-
-    
 }
