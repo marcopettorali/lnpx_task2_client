@@ -90,8 +90,8 @@ public class UserPaneGUI extends AnchorPane {
         List<PieChart.Data> content = new ArrayList<>();
         for (int i = 0; i < trKey.size(); i++) {
 
-            String word = trKey.get(i).getWord();
-            Long value = trKey.get(i).getValue();
+            String word = trKey.get(i).getKeyword();
+            Long value = trKey.get(i).getPercentage();
             content.add(new PieChart.Data(word, value));
 
         }
@@ -148,7 +148,7 @@ public class UserPaneGUI extends AnchorPane {
 
             Trend selected = TrendingTable.getSelected();
             if (selected != null) {
-                SearchBar.setText(selected.getWord());
+                SearchBar.setText(selected.getKeyword());
                 NewspaperBar.setText("");
                 AuthorBar.setText("");
                 CountryBar.setText("");

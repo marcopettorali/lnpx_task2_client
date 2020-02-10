@@ -2,20 +2,20 @@ package lnpx;
 
 public class Trend {
 
-    private String word;
-    private Long value;
+    private String Keyword;
+    private Long Percentage;
 
     public Trend(String word, Long value) {
-        this.word = word;
-        this.value = value;
+        this.Keyword = word;
+        this.Percentage = value;
     }
 
-    public String getWord() {
-        return word;
+    public String getKeyword() {
+        return Keyword;
     }
 
-    public Long getValue() {
-        return value;
+    public Long getPercentage() {
+        return Percentage;
     }
 
 }

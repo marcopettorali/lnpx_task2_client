@@ -21,7 +21,7 @@ public class TrendingKeywordsTable extends TableView<Trend> {
         
         super();
         TableColumn Keyword = new TableColumn("Keyword");
-        Keyword.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Keyword.setCellValueFactory(new PropertyValueFactory<>("Keyword"));
         TableColumn Percentage = new TableColumn("Percentage");
         Percentage.setCellValueFactory(new PropertyValueFactory<>("Percentage"));
         
