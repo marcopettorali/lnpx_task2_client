@@ -29,11 +29,11 @@ public class MainClass extends Application {
         LoginStage.show();
 
     }
-    
-    public static void loadMainForm(){
+
+    public static void loadMainForm() {
         loadMainStage();
     }
-    
+
     private static void loadMainStage() {
 
         SignUpStage.close();
@@ -71,60 +71,56 @@ public class MainClass extends Application {
         loadLoginStage();
     }
 
-    
-
     public static void searchContent(String keyword, Map<String, String> filters) {
-        
-         FindMsg search = new FindMsg(keyword, filters);
-         ConnectionToServer.sendSearchRequest(search);
-         
-        
+
+        FindMsg search = new FindMsg(keyword, filters);
+        ConnectionToServer.sendSearchRequest(search);
+
     }
 
     public static void requestTrendingKeywords() {
 
         ConnectionToServer.sendTrendingRequest();
-        
+
     }
 
     public static void requestRecommendedArticles() {
-        
+
         ConnectionToServer.sendRecommendedRequest();
-        
-       
+
     }
 
     public static void sendViewedArticle(String link, Map<String, String> filters) {
-        
+
         ViewMsg v = new ViewMsg(link, filters);
         ConnectionToServer.sendViewedRequest(v);
-        
+
     }
 
     public static void sendSites(Map<String, Boolean> sites) {
-        
+
         ChangeSitesMsg csm = new ChangeSitesMsg(sites);
         ConnectionToServer.sendSitesRequest(csm);
-        
+
     }
 
     public static void scrapeNow() {
-        
+
         ConnectionToServer.sendScrapeNowRequest();
-     
+
     }
 
     public static void sendScrapePeriod(double period) {
-        
+
         ChangePeriodMsg cpm = new ChangePeriodMsg(period);
         ConnectionToServer.sendScrapePeriodRequest(cpm);
-        
+
     }
 
     public static void requestUsersList() {
 
         ConnectionToServer.sendUserListRequest();
-    
+
     }
 
     private static void loadAdminStage() {
@@ -143,18 +139,17 @@ public class MainClass extends Application {
     }
 
     public static void login(String username, String password) {
-        
-        LoginMsg msg = new LoginMsg(username,password);
-        System.out.println("STEP 1");
+
+        LoginMsg msg = new LoginMsg(username, password);
         ConnectionToServer.loginToServer(msg);
-        
+
     }
-    
+
     public static void signIn(String user, String pwd, String email, String fn, String ln, Date d) {
 
         SignInMsg sign = new SignInMsg(user, fn, ln, d, email, pwd, false);
         ConnectionToServer.signInToServer(sign);
-        
+
     }
 
     @Override
@@ -170,8 +165,11 @@ public class MainClass extends Application {
     }
 
     public static void main(String[] args) {
-        
         launch(args);
+    }
+
+    @Override
+    public void stop() {
         ConnectionToServer.closeConnection();
     }
 

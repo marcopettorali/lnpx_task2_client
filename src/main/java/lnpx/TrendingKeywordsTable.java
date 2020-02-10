@@ -13,11 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lnpx.messages.*;
 
-
-/**
- *
- * @author rnoce
- */
 public class TrendingKeywordsTable extends TableView<Trend> {
     
     private ObservableList<Trend> TrendingKeys;
@@ -36,10 +31,10 @@ public class TrendingKeywordsTable extends TableView<Trend> {
     }
     
     public void setItems(List<Trend> tr){
-        
+        this.getItems().clear();
         TrendingKeys=FXCollections.observableArrayList();
         TrendingKeys.addAll(tr);
-        this.getItems().clear();
+        
         this.setItems(TrendingKeys);
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }

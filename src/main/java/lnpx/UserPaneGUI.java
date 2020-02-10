@@ -52,104 +52,102 @@ public class UserPaneGUI extends AnchorPane {
     protected static Label ArticleoverLabel;
     protected static ArticleOverviewTable SingleArticleTable;
     protected static ObservableList<PieChart.Data> PieChartData;
-    protected static Map<String,String> LastUsedFilter;
+    protected static Map<String, String> LastUsedFilter;
 
-    
-    public static void addSearchResults(List<Article> list){
-        
-        if(!ResultTable.isVisible()){
-                    ResultTable.setVisible(true);
-                    ResultLabel.setVisible(true);
-                }
-                ResultTable.setItems(list);
-                if(list.isEmpty()){
-                    ErrorLabel.setText("No articles were found, please check the keyword inserted!");
-                }
-        
+    public static void addSearchResults(List<Article> list) {
+
+        if (!ResultTable.isVisible()) {
+            ResultTable.setVisible(true);
+            ResultLabel.setVisible(true);
+        }
+        ResultTable.setItems(list);
+        if (list.isEmpty()) {
+            ErrorLabel.setText("No articles were found, please check the keyword inserted!");
+        }
+
     }
-    
-    public static void addRecommendedResults(List<Article> list){
-        
+
+    public static void addRecommendedResults(List<Article> list) {
+
         RecommendedTable.setItems(list);
-        
+
     }
-    
-    public static void addTrendingKeywords(LinkedHashMap<String,Long> trendMap){
+
+    public static void addTrendingKeywords(LinkedHashMap<String, Long> trendMap) {
         
         List<Trend> trKey = new ArrayList<>();
-        for(Map.Entry<String,Long>entry : trendMap.entrySet()){
-                        
-                        String key = entry.getKey();
-                        Long value = entry.getValue();
-                        Trend t = new Trend(key,value);
-                        trKey.add(t);
-                        
-                    }
+        for (Map.Entry<String, Long> entry : trendMap.entrySet()) {
+
+            String key = entry.getKey();
+            Long value = entry.getValue();
+            Trend t = new Trend(key, value);
+            trKey.add(t);
+
+        }
         TrendingTable.setItems(trKey);
-        
-        PieChartData=FXCollections.observableArrayList();
+
+        PieChartData = FXCollections.observableArrayList();
         List<PieChart.Data> content = new ArrayList<>();
-        for(int i=0;i<trKey.size();i++){
-            
+        for (int i = 0; i < trKey.size(); i++) {
+
             String word = trKey.get(i).getWord();
             Long value = trKey.get(i).getValue();
-            content.add(new PieChart.Data(word,value));
-            
+            content.add(new PieChart.Data(word, value));
+
         }
         PieChartData.addAll(content);
-              
+        
     }
-    
-    
-    private void buildSearchButton(){
-        
-        
+
+    private void buildSearchButton() {
+
         SearchButton.setMnemonicParsing(false);
         SearchButton.setText("Search");
-        
+
         SearchButton.setOnAction(e -> {
-            
-            String keyword=SearchBar.getText();
+
+            String keyword = SearchBar.getText();
             String journal = NewspaperBar.getText();
             String author = AuthorBar.getText();
             String country = CountryBar.getText();
             String region = RegionBar.getText();
             String city = CityBar.getText();
-            
-            if(keyword.equals("")){
+
+            if (keyword.equals("")) {
                 ErrorLabel.setText("You must insert a keyword");
-            }
-            else{
+            } else {
                 ErrorLabel.setText("");
-                HashMap<String,String> filt = new HashMap();
-                filt.put("Newspaper",journal);
-                filt.put("Author",author);
-                filt.put("Country",country);
-                filt.put("Region",region);
-                filt.put("City",city);
-                LastUsedFilter = filt;
+                HashMap<String, String> filt = new HashMap();
+                filt.put("Newspaper", journal);
+                filt.put("Author", author);
+                filt.put("Country", country);
+                filt.put("Region", region);
+                filt.put("City", city);
                 
-                MainClass.searchContent(keyword,filt);
-                              
+                LastUsedFilter = new HashMap<>(filt);
+                LastUsedFilter.put("Keyword", keyword);
+
+                MainClass.searchContent(keyword, filt);
+
             }
-             
+
         });
-        
+
     }
-    
-    private void initializationPane(){
-        
-        MainClass.requestTrendingKeywords();       
+
+    private void initializationPane() {
+
+        MainClass.requestTrendingKeywords();
         MainClass.requestRecommendedArticles();
-           
+
     }
-    
-    private void setBehaviour(){
-        
-        TrendingTable.setOnMouseClicked( e -> {
-           
+
+    private void setBehaviour() {
+
+        TrendingTable.setOnMouseClicked(e -> {
+
             Trend selected = TrendingTable.getSelected();
-            if(selected != null){
+            if (selected != null) {
                 SearchBar.setText(selected.getWord());
                 NewspaperBar.setText("");
                 AuthorBar.setText("");
@@ -158,94 +156,92 @@ public class UserPaneGUI extends AnchorPane {
                 CityBar.setText("");
                 ErrorLabel.setText("");
             }
-                
+
         });
-        
-        
+
         RecommendedTable.setRowFactory(tableView -> {
             final TableRow<Article> row = new TableRow<>();
-            row.hoverProperty().addListener((observable) ->{
-                
+            row.hoverProperty().addListener((observable) -> {
+
                 final Article art = row.getItem();
                 if (row.isHover() && art != null) {
-                    
+
                     List<SingleWordAnalysis> overview = new ArrayList<>();
-                    for(Map.Entry<String,Integer>entry : art.keyWordAnalysis.entrySet()){
-                        
+                    for (Map.Entry<String, Integer> entry : art.keyWordAnalysis.entrySet()) {
+
                         String key = entry.getKey();
                         int value = entry.getValue();
-                        SingleWordAnalysis swa = new SingleWordAnalysis(key,value);
+                        SingleWordAnalysis swa = new SingleWordAnalysis(key, value);
                         overview.add(swa);
-                        
+
                     }
                     SingleArticleTable.setItems(overview);
                 }
-              });
-             
-            return row;
-        
             });
-            
-       ResultTable.setRowFactory(tableView -> {
+
+            return row;
+
+        });
+
+        ResultTable.setRowFactory(tableView -> {
             final TableRow<Article> row = new TableRow<>();
-            row.hoverProperty().addListener((observable) ->{
-                
+            row.hoverProperty().addListener((observable) -> {
+
                 final Article art = row.getItem();
                 if (row.isHover() && art != null) {
-                    
+
                     List<SingleWordAnalysis> overview = new ArrayList<>();
-                    for(Map.Entry<String,Integer>entry : art.keyWordAnalysis.entrySet()){
-                        
+                    for (Map.Entry<String, Integer> entry : art.keyWordAnalysis.entrySet()) {
+
                         String key = entry.getKey();
                         int value = entry.getValue();
-                        SingleWordAnalysis swa = new SingleWordAnalysis(key,value);
+                        SingleWordAnalysis swa = new SingleWordAnalysis(key, value);
                         overview.add(swa);
-                        
+
                     }
                     SingleArticleTable.setItems(overview);
                 }
-              });
-             
-            return row;
-        
             });
-        
-        RecommendedTable.setOnMouseClicked( e -> {
-           
+
+            return row;
+
+        });
+
+        RecommendedTable.setOnMouseClicked(e -> {
+
             Article selected = RecommendedTable.getSelected();
-            if(selected != null){
-                try{
-                Desktop.getDesktop().browse(new URI(selected.Link));
-                }catch (IOException e1) {
-                        e1.printStackTrace();
+            if (selected != null) {
+                try {
+                    Desktop.getDesktop().browse(new URI(selected.Link));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 } catch (URISyntaxException e2) {
-                         e2.printStackTrace();
+                    e2.printStackTrace();
                 }
             }
-            
+
         });
-        
-        ResultTable.setOnMouseClicked( e -> {
-           
+
+        ResultTable.setOnMouseClicked(e -> {
+
             Article selected = ResultTable.getSelected();
-            if(selected != null){
-                
-                MainClass.sendViewedArticle(selected.Link,LastUsedFilter);
-               
-                try{
-                Desktop.getDesktop().browse(new URI(selected.Link));
-                }catch (IOException e1) {
-                        e1.printStackTrace();
+            if (selected != null) {
+
+                MainClass.sendViewedArticle(selected.Link, LastUsedFilter);
+
+                try {
+                    Desktop.getDesktop().browse(new URI(selected.Link));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 } catch (URISyntaxException e2) {
-                         e2.printStackTrace();
+                    e2.printStackTrace();
                 }
             }
-            
+
         });
-        
-        
+
     }
-    
+
     public UserPaneGUI() {
 
         vBox = new VBox();
@@ -276,15 +272,14 @@ public class UserPaneGUI extends AnchorPane {
         ResultTable = new ArticlesTable();
         ArticleoverLabel = new Label();
         SingleArticleTable = new ArticleOverviewTable();
-        
+
         ResultLabel.setVisible(false);
         ResultTable.setVisible(false);
-        
+
         buildSearchButton();
         initializationPane();
         setBehaviour();
-        
-        
+
         setId("AnchorPane");
         setPrefHeight(651.0);
         setPrefWidth(821.0);
@@ -314,11 +309,11 @@ public class UserPaneGUI extends AnchorPane {
         RegionLabel.setPrefHeight(17.0);
         RegionLabel.setPrefWidth(50.0);
         RegionLabel.setText("Region");
-        
+
         CityLabel.setPrefHeight(17.0);
         CityLabel.setPrefWidth(50.0);
         CityLabel.setText("City");
-        
+
         NewspaperLabel.setPrefHeight(17.0);
         NewspaperLabel.setPrefWidth(82.0);
         NewspaperLabel.setText("Newspaper");
@@ -326,11 +321,9 @@ public class UserPaneGUI extends AnchorPane {
         AuthorLabel.setPrefHeight(17.0);
         AuthorLabel.setPrefWidth(61.0);
         AuthorLabel.setText("Author");
-        
+
         ErrorLabel.setText("");
         ErrorLabel.setTextFill(Color.RED);
-        
-        
 
         separator.setLayoutX(3.0);
         separator.setLayoutY(265.0);
@@ -366,7 +359,6 @@ public class UserPaneGUI extends AnchorPane {
         TrendingTable.setLayoutY(39.0);
         TrendingTable.setPrefHeight(227.0);
         TrendingTable.setPrefWidth(258.0);
-
 
         ChartLabel.setLayoutX(549.0);
         ChartLabel.setLayoutY(310.0);
@@ -404,8 +396,6 @@ public class UserPaneGUI extends AnchorPane {
         SingleArticleTable.setPrefHeight(283.0);
         SingleArticleTable.setPrefWidth(258.0);
 
-       
-
         vBox.getChildren().add(Search);
         vBox.getChildren().add(SearchBar);
         vBox.getChildren().add(Filters);
@@ -421,14 +411,14 @@ public class UserPaneGUI extends AnchorPane {
         vBox.getChildren().add(CityBar);
         vBox.getChildren().add(SearchButton);
         vBox.getChildren().add(ErrorLabel);
-        
+
         getChildren().add(vBox);
         getChildren().add(separator);
         getChildren().add(separator0);
         getChildren().add(RecommendedLabel);
         getChildren().add(RecommendedTable);
         getChildren().add(TrendingLabel);
-        
+
         getChildren().add(TrendingTable);
         getChildren().add(ChartLabel);
         getChildren().add(PieChart);

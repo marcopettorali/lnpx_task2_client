@@ -1,6 +1,5 @@
 package lnpx;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,105 +37,93 @@ public class SignInPaneGUI extends AnchorPane {
     protected static Label EmailLabel;
     protected static TextField EmailText;
 
-    public static void updateSignInPane(int result){
-        
-        if( result == 0 ){
+    public static void updateSignInPane(int result) {
+
+        if (result == 0) {
             ErrorLabel.setText("Registration successfully completed");
             ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#4314ff"));
-            
+
         }
-        if( result == -1){
+        if (result == -1) {
             ErrorLabel.setText("Username already exists");
-            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));   
+            ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));
         }
-        if(result == -2){
+        if (result == -2) {
             ErrorLabel.setText("An error has occurred during the communication with the server !");
             ErrorLabel.setTextFill(javafx.scene.paint.Color.valueOf("#ff1212"));
-            
         }
-        
-           
     }
-    
-    
-    
-    
-    public void buildSignInButton(){
-        
+
+    public void buildSignInButton() {
+
         SignInButton.setLayoutX(82.0);
         SignInButton.setLayoutY(450.0);
         SignInButton.setMnemonicParsing(false);
         SignInButton.setPrefHeight(25.0);
         SignInButton.setPrefWidth(108.0);
         SignInButton.setText("Sign in");
-        
-        
-        
+
         SignInButton.setOnAction((ActionEvent e) -> {
-            
-        String FNString = FirstNameText.getText();
-        String LNString = LastNameText.getText();
-        String EmailString = EmailText.getText();
-        String dobString = DateText.getText();
-        String UserString = UsernameText.getText();
-        String PasswordString = PasswordText.getText();
-        
-        
-        if (FNString.equals("") || EmailString.equals("") || LNString.equals("") || dobString.equals("") || UserString.equals("") || PasswordString.equals("")) {
+
+            String FNString = FirstNameText.getText();
+            String LNString = LastNameText.getText();
+            String EmailString = EmailText.getText();
+            String dobString = DateText.getText();
+            String UserString = UsernameText.getText();
+            String PasswordString = PasswordText.getText();
+
+            if (FNString.equals("") || EmailString.equals("") || LNString.equals("") || dobString.equals("") || UserString.equals("") || PasswordString.equals("")) {
                 ErrorLabel.setText("Some of the fields are empty");
                 return;
             }
-            
 
-        for (char c : FNString.toCharArray()) {
-               if (Character.isDigit(c)) {
+            for (char c : FNString.toCharArray()) {
+                if (Character.isDigit(c)) {
                     ErrorLabel.setText("First name must not contain a number");
                     return;
                 }
             }
-            
-        for (char c : LNString.toCharArray()) {
+
+            for (char c : LNString.toCharArray()) {
                 if (Character.isDigit(c)) {
                     ErrorLabel.setText("Last name must not contain a number");
                     return;
                 }
             }
-            
-        if (!PasswordText.getText().equals(RepeatText.getText())) {
+
+            if (!PasswordText.getText().equals(RepeatText.getText())) {
                 ErrorLabel.setText("Repeated password does not match");
                 return;
             }
-        Date birth;
-        try{
-            birth=new SimpleDateFormat("dd/MM/yyyy").parse(dobString);
-        }catch(ParseException pe){
-            ErrorLabel.setText("Please insert the date using the rigth format ( dd/MM/yyyy)");
-            return;
+            Date birth;
+            try {
+                birth = new SimpleDateFormat("dd/MM/yyyy").parse(dobString);
+            } catch (ParseException pe) {
+                ErrorLabel.setText("Please insert the date using the rigth format ( dd/MM/yyyy)");
+                return;
             }
-        
-        MainClass.signIn(UserString,PasswordString,EmailString,FNString,LNString,birth);
-      
-        });  
-        
+
+            MainClass.signIn(UserString, PasswordString, EmailString, FNString, LNString, birth);
+
+        });
+
     }
-    
-    public void buildBackToLoginButton(){
-        
+
+    public void buildBackToLoginButton() {
+
         BackToLoginButton.setLayoutX(294.0);
         BackToLoginButton.setLayoutY(450.0);
         BackToLoginButton.setMnemonicParsing(false);
         BackToLoginButton.setPrefHeight(25.0);
         BackToLoginButton.setPrefWidth(108.0);
         BackToLoginButton.setText("Back to login");
-        
+
         BackToLoginButton.setOnAction(e -> {
             MainClass.backToLoginForm();
         });
-        
+
     }
-    
-    
-    
+
     public SignInPaneGUI() {
 
         label = new Label();
@@ -264,7 +251,7 @@ public class SignInPaneGUI extends AnchorPane {
 
         buildSignInButton();
         buildBackToLoginButton();
-        
+
         getChildren().add(label);
         getChildren().add(separator);
         getChildren().add(separator0);
@@ -279,7 +266,7 @@ public class SignInPaneGUI extends AnchorPane {
         getChildren().add(UsernameLabel);
         getChildren().add(UsernameText);
         getChildren().add(PasswordText);
-        getChildren().add(PasswordLabel); 
+        getChildren().add(PasswordLabel);
         getChildren().add(RepeatLabel);
         getChildren().add(RepeatText);
         getChildren().add(ErrorLabel);
@@ -287,7 +274,6 @@ public class SignInPaneGUI extends AnchorPane {
         getChildren().add(BackToLoginButton);
         getChildren().add(separator1);
         getChildren().add(separator2);
-        
 
     }
 }
