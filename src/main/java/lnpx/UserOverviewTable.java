@@ -23,12 +23,12 @@ public class UserOverviewTable extends TableView<User> {
     public UserOverviewTable(){
         
         super();
-        TableColumn Username = new TableColumn("Username");
-        Username.setCellValueFactory(new PropertyValueFactory<>("Username"));
-        TableColumn FirstName = new TableColumn("FirstName");
-        FirstName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
-        TableColumn LastName = new TableColumn("LastName");
-        LastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+        TableColumn Username = new TableColumn("UserID");
+        Username.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        TableColumn FirstName = new TableColumn("firstName");
+        FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        TableColumn LastName = new TableColumn("lastName");
+        LastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         TableColumn dateOfBirth = new TableColumn("dateOfBirth");
         dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
         TableColumn email = new TableColumn("email");
