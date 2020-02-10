@@ -12,19 +12,27 @@ package lnpx;
 public class SingleWordAnalysis {
     
     String Word;
-    int NumberOfOccurrence;
+    int Occurrence;
 
     public SingleWordAnalysis(String Word, int NumberOfOccurrence) {
         this.Word = Word;
-        this.NumberOfOccurrence = NumberOfOccurrence;
+        this.Occurrence = NumberOfOccurrence;
     }
 
     public String getWord() {
         return Word;
     }
 
-    public int getNumberOfOccurrence() {
-        return NumberOfOccurrence;
+    public int getOccurrence() {
+        return Occurrence;
+    }
+
+    public void setWord(String Word) {
+        this.Word = Word;
+    }
+
+    public void setOccurrence(int Occurrence) {
+        this.Occurrence = Occurrence;
     }
     
     

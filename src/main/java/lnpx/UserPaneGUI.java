@@ -113,9 +113,7 @@ public class UserPaneGUI extends AnchorPane {
             String region = RegionBar.getText();
             String city = CityBar.getText();
 
-            if (keyword.equals("")) {
-                ErrorLabel.setText("You must insert a keyword");
-            } else {
+            
                 ErrorLabel.setText("");
                 HashMap<String, String> filt = new HashMap();
                 filt.put("Newspaper", journal);
@@ -129,8 +127,8 @@ public class UserPaneGUI extends AnchorPane {
 
                 MainClass.searchContent(keyword, filt);
 
-            }
-
+            
+            
         });
 
     }
