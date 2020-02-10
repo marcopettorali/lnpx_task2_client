@@ -39,8 +39,6 @@ public class UserPaneGUI extends AnchorPane {
     protected static TextField CityBar;
     protected static Label ErrorLabel;
     protected static Button SearchButton;
-    protected static Separator separator;
-    protected static Separator separator0;
     protected static Label RecommendedLabel;
     protected static ArticlesTable RecommendedTable;
     protected static Label TrendingLabel;
@@ -62,7 +60,7 @@ public class UserPaneGUI extends AnchorPane {
         }
         ResultTable.setItems(list);
         if (list.isEmpty()) {
-            ErrorLabel.setText("No articles were found, please check the keyword inserted!");
+            ErrorLabel.setText("No articles found!");
         }
 
     }
@@ -95,7 +93,9 @@ public class UserPaneGUI extends AnchorPane {
             content.add(new PieChart.Data(word, value));
 
         }
+        PieChartData.clear();
         PieChartData.addAll(content);
+       
         
     }
 
@@ -258,14 +258,11 @@ public class UserPaneGUI extends AnchorPane {
         AuthorBar = new TextField();
         ErrorLabel = new Label();
         SearchButton = new Button();
-        separator = new Separator();
-        separator0 = new Separator();
         RecommendedLabel = new Label();
         RecommendedTable = new ArticlesTable();
         TrendingLabel = new Label();
         TrendingTable = new TrendingKeywordsTable();
         ChartLabel = new Label();
-        PieChart = new PieChart(PieChartData);
         ResultLabel = new Label();
         ResultTable = new ArticlesTable();
         ArticleoverLabel = new Label();
@@ -273,7 +270,10 @@ public class UserPaneGUI extends AnchorPane {
 
         ResultLabel.setVisible(false);
         ResultTable.setVisible(false);
-
+        
+        PieChartData = FXCollections.observableArrayList();
+        PieChart = new PieChart(PieChartData);
+        
         buildSearchButton();
         initializationPane();
         setBehaviour();
@@ -323,17 +323,6 @@ public class UserPaneGUI extends AnchorPane {
         ErrorLabel.setText("");
         ErrorLabel.setTextFill(Color.RED);
 
-        separator.setLayoutX(3.0);
-        separator.setLayoutY(265.0);
-        separator.setPrefHeight(6.0);
-        separator.setPrefWidth(236.0);
-
-        separator0.setLayoutX(239.0);
-        separator0.setLayoutY(-9.0);
-        separator0.setOrientation(javafx.geometry.Orientation.VERTICAL);
-        separator0.setPrefHeight(267.0);
-        separator0.setPrefWidth(4.0);
-
         RecommendedLabel.setLayoutX(258.0);
         RecommendedLabel.setLayoutY(14.0);
         RecommendedLabel.setPrefHeight(17.0);
@@ -371,7 +360,7 @@ public class UserPaneGUI extends AnchorPane {
         PieChart.setPrefWidth(274.0);
 
         ResultLabel.setLayoutX(14.0);
-        ResultLabel.setLayoutY(318.0);
+        ResultLabel.setLayoutY(325.0);
         ResultLabel.setPrefHeight(17.0);
         ResultLabel.setPrefWidth(74.0);
         ResultLabel.setText("Results");
@@ -411,8 +400,6 @@ public class UserPaneGUI extends AnchorPane {
         vBox.getChildren().add(ErrorLabel);
 
         getChildren().add(vBox);
-        getChildren().add(separator);
-        getChildren().add(separator0);
         getChildren().add(RecommendedLabel);
         getChildren().add(RecommendedTable);
         getChildren().add(TrendingLabel);
