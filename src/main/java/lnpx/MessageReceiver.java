@@ -21,7 +21,7 @@ import lnpx.messages.*;
  */
 public class MessageReceiver extends Thread {
 
-    private boolean endExecution;
+    private volatile boolean endExecution;
     private ObjectInputStream ois;
     private DataInputStream dis;
     private Socket socket;
