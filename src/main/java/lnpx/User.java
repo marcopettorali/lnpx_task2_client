@@ -1,5 +1,6 @@
 package lnpx;
 
+import java.io.Serializable;
 import java.util.Date;
 import org.bson.Document;
 
@@ -12,7 +13,7 @@ import org.bson.Document;
  *
  * @author Riccardo
  */
-public class User {
+public class User implements Serializable{
 
     public String userID;
     public String firstName;

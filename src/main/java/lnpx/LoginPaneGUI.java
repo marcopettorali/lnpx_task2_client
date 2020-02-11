@@ -25,6 +25,9 @@ public class LoginPaneGUI extends AnchorPane {
         if (res == 0){
             MainClass.loadMainForm();
         }
+        if (res == 1){
+            MainClass.loadAdminStage();
+        }
         
         if (res == -1) {
                 errorLabel.setText("Username or password not valid");

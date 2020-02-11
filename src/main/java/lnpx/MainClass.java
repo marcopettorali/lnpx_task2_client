@@ -1,7 +1,5 @@
 package lnpx;
 
-import java.io.*;
-import java.net.*;
 import java.util.Date;
 import java.util.Map;
 import javafx.application.*;
@@ -123,7 +121,7 @@ public class MainClass extends Application {
 
     }
 
-    private static void loadAdminStage() {
+    public static void loadAdminStage() {
 
         LoginStage.close();
         SignUpStage.close();

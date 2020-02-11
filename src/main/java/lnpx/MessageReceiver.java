@@ -120,16 +120,16 @@ public class MessageReceiver extends Thread {
 
     private void receiveUsersList() {
 
-        ClientsResponseMsg ret = null;
         try {
-            ret = (ClientsResponseMsg) ois.readObject();
+            ClientsResponseMsg ret = (ClientsResponseMsg) ois.readObject();
+            final List<User> list = ret.getClients();
+            Platform.runLater(() -> (AdminPaneGUI.addUsersList(list)));
         } catch (IOException io) {
             System.out.println(io.getMessage());
         } catch (ClassNotFoundException cfe) {
             System.out.println(cfe.getMessage());
         }
-        final List<User> list = ret.getClients();
-        Platform.runLater(() -> (AdminPaneGUI.addUsersList(list)));
+
     }
 
     private void receiveACK() {
