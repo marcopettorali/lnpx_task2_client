@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -74,10 +75,27 @@ public class UserPaneGUI extends AnchorPane {
     public static void addTrendingKeywords(LinkedHashMap<String, Long> trendMap) {
         
         List<Trend> trKey = new ArrayList<>();
+        
+        double somma = 0;
+        
+        for (Map.Entry<String, Long> entry : trendMap.entrySet()) {
+            
+            Double d = new Double(entry.getValue());
+            somma+=d;
+            
+        }
+        
         for (Map.Entry<String, Long> entry : trendMap.entrySet()) {
 
             String key = entry.getKey();
-            Long value = entry.getValue();
+           
+            //Long value = entry.getValue();
+            
+            Double d = new Double(entry.getValue());
+            Double perc = new Double((d/somma)*100);
+            
+            Long value = (perc.longValue())+1;
+            
             Trend t = new Trend(key, value);
             trKey.add(t);
 
@@ -87,7 +105,10 @@ public class UserPaneGUI extends AnchorPane {
         PieChartData = FXCollections.observableArrayList();
         List<PieChart.Data> content = new ArrayList<>();
         for (int i = 0; i < trKey.size(); i++) {
-
+            
+            if(i==25){
+                break;
+            }
             String word = trKey.get(i).getKeyword();
             Long value = trKey.get(i).getPercentage();
             content.add(new PieChart.Data(word, value));
@@ -95,7 +116,7 @@ public class UserPaneGUI extends AnchorPane {
         }
         PieChartData.clear();
         PieChartData.addAll(content);
-       
+        PieChart.setData(PieChartData);
         
     }
 
@@ -211,6 +232,7 @@ public class UserPaneGUI extends AnchorPane {
             if (selected != null) {
                 try {
                     Desktop.getDesktop().browse(new URI(selected.Link));
+                    RecommendedTable.getSelectionModel().clearSelection();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (URISyntaxException e2) {
@@ -229,6 +251,7 @@ public class UserPaneGUI extends AnchorPane {
 
                 try {
                     Desktop.getDesktop().browse(new URI(selected.Link));
+                    ResultTable.getSelectionModel().clearSelection();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (URISyntaxException e2) {
@@ -355,9 +378,13 @@ public class UserPaneGUI extends AnchorPane {
         ChartLabel.setFont(new Font("System Bold", 12.0));
 
         PieChart.setLayoutX(541.0);
-        PieChart.setLayoutY(335.0);
-        PieChart.setPrefHeight(257.0);
-        PieChart.setPrefWidth(274.0);
+        PieChart.setLayoutY(315.0);
+        PieChart.setMinHeight(390.0);
+        PieChart.setMinWidth(370.0);
+        PieChart.setLegendSide(Side.RIGHT);
+        PieChart.setMaxWidth(290);
+        PieChart.setMaxHeight(200);
+        PieChart.setLegendVisible(false);
 
         ResultLabel.setLayoutX(14.0);
         ResultLabel.setLayoutY(325.0);
