@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
@@ -29,7 +30,7 @@ public class UserPaneGUI extends AnchorPane {
     protected static TextField SearchBar;
     protected static Label Filters;
     protected static Label NewspaperLabel;
-    protected static TextField NewspaperBar;
+    protected static ChoiceBox NewspaperBar;
     protected static Label AuthorLabel;
     protected static TextField AuthorBar;
     protected static Label TopicLabel;
@@ -126,7 +127,7 @@ public class UserPaneGUI extends AnchorPane {
         SearchButton.setOnAction(e -> {
 
             String keyword = SearchBar.getText();
-            String journal = NewspaperBar.getText();
+            String journal = (String)NewspaperBar.getValue();
             String author = AuthorBar.getText();
             String topic = TopicBar.getText();
             String country ="";
@@ -168,7 +169,7 @@ public class UserPaneGUI extends AnchorPane {
             Trend selected = TrendingTable.getSelected();
             if (selected != null) {
                 SearchBar.setText(selected.getKeyword());
-                NewspaperBar.setText("");
+                NewspaperBar.setValue("");
                 AuthorBar.setText("");
                 TopicBar.setText("");
                 CityBar.setText("");
@@ -271,7 +272,7 @@ public class UserPaneGUI extends AnchorPane {
         TopicLabel = new Label();
         TopicBar = new TextField();
         NewspaperLabel = new Label();
-        NewspaperBar = new TextField();
+        NewspaperBar = new ChoiceBox();
         CityLabel = new Label();
         CityBar = new TextField();
         AuthorLabel = new Label();
@@ -332,6 +333,12 @@ public class UserPaneGUI extends AnchorPane {
         NewspaperLabel.setPrefHeight(17.0);
         NewspaperLabel.setPrefWidth(82.0);
         NewspaperLabel.setText("Newspaper");
+        
+        NewspaperBar.getItems().add("");
+        NewspaperBar.getItems().add("ANSA");
+        NewspaperBar.getItems().add("La Repubblica");
+        NewspaperBar.getItems().add("Corriere della Sera");
+        NewspaperBar.getItems().add("SKY TG 24");
 
         AuthorLabel.setPrefHeight(17.0);
         AuthorLabel.setPrefWidth(61.0);
