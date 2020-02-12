@@ -32,10 +32,8 @@ public class UserPaneGUI extends AnchorPane {
     protected static TextField NewspaperBar;
     protected static Label AuthorLabel;
     protected static TextField AuthorBar;
-    protected static Label CountryLabel;
-    protected static TextField CountryBar;
-    protected static Label RegionLabel;
-    protected static TextField RegionBar;
+    protected static Label TopicLabel;
+    protected static TextField TopicBar;
     protected static Label CityLabel;
     protected static TextField CityBar;
     protected static Label ErrorLabel;
@@ -130,8 +128,9 @@ public class UserPaneGUI extends AnchorPane {
             String keyword = SearchBar.getText();
             String journal = NewspaperBar.getText();
             String author = AuthorBar.getText();
-            String country = CountryBar.getText();
-            String region = RegionBar.getText();
+            String topic = TopicBar.getText();
+            String country ="";
+            String region = "";
             String city = CityBar.getText();
 
             
@@ -139,12 +138,13 @@ public class UserPaneGUI extends AnchorPane {
                 HashMap<String, String> filt = new HashMap();
                 filt.put("Newspaper", journal);
                 filt.put("Author", author);
-                filt.put("Country", country);
+                filt.put("Topic", topic);
+                filt.put("Country",country);
                 filt.put("Region", region);
                 filt.put("City", city);
                 
                 LastUsedFilter = new HashMap<>(filt);
-                LastUsedFilter.put("Keyword", keyword);
+                ///LastUsedFilter.put("Keyword", keyword);
 
                 MainClass.searchContent(keyword, filt);
 
@@ -170,8 +170,7 @@ public class UserPaneGUI extends AnchorPane {
                 SearchBar.setText(selected.getKeyword());
                 NewspaperBar.setText("");
                 AuthorBar.setText("");
-                CountryBar.setText("");
-                RegionBar.setText("");
+                TopicBar.setText("");
                 CityBar.setText("");
                 ErrorLabel.setText("");
             }
@@ -269,12 +268,10 @@ public class UserPaneGUI extends AnchorPane {
         Search = new Label();
         SearchBar = new TextField();
         Filters = new Label();
-        CountryLabel = new Label();
-        CountryBar = new TextField();
+        TopicLabel = new Label();
+        TopicBar = new TextField();
         NewspaperLabel = new Label();
         NewspaperBar = new TextField();
-        RegionLabel = new Label();
-        RegionBar = new TextField();
         CityLabel = new Label();
         CityBar = new TextField();
         AuthorLabel = new Label();
@@ -323,13 +320,10 @@ public class UserPaneGUI extends AnchorPane {
         Filters.setText("Filters:");
         Filters.setFont(new Font("System Bold", 12.0));
 
-        CountryLabel.setPrefHeight(17.0);
-        CountryLabel.setPrefWidth(50.0);
-        CountryLabel.setText("Country");
+        TopicLabel.setPrefHeight(17.0);
+        TopicLabel.setPrefWidth(50.0);
+        TopicLabel.setText("Topic");
 
-        RegionLabel.setPrefHeight(17.0);
-        RegionLabel.setPrefWidth(50.0);
-        RegionLabel.setText("Region");
 
         CityLabel.setPrefHeight(17.0);
         CityLabel.setPrefWidth(50.0);
@@ -417,10 +411,8 @@ public class UserPaneGUI extends AnchorPane {
         vBox.getChildren().add(NewspaperBar);
         vBox.getChildren().add(AuthorLabel);
         vBox.getChildren().add(AuthorBar);
-        vBox.getChildren().add(CountryLabel);
-        vBox.getChildren().add(CountryBar);
-        vBox.getChildren().add(RegionLabel);
-        vBox.getChildren().add(RegionBar);
+        vBox.getChildren().add(TopicLabel);
+        vBox.getChildren().add(TopicBar);
         vBox.getChildren().add(CityLabel);
         vBox.getChildren().add(CityBar);
         vBox.getChildren().add(SearchButton);
