@@ -4,15 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import org.bson.Document;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Riccardo
- */
 public class User implements Serializable{
 
     public String userID;
@@ -22,10 +13,11 @@ public class User implements Serializable{
     public String email;
     public String password;
     public boolean adminStatus; //true=admin ; false=simple user
+    public int views;
 
     public User() {
     }
-    
+
     public User(String userID, String firstName, String lastName, Date dateOfBirth, String email, String password, boolean adminStatus) {
         this.userID = userID;
         this.firstName = firstName;
@@ -34,6 +26,7 @@ public class User implements Serializable{
         this.email = email;
         this.password = password;
         this.adminStatus = adminStatus;
+        this.views=0;
     }
 
     public Document toJSON() {
@@ -56,10 +49,19 @@ public class User implements Serializable{
         this.dateOfBirth = d.getDate("dateOfBirth");
         this.email = d.getString("email");
         this.password = d.getString("password");
-        this.adminStatus=d.getBoolean("adminStatus");
+        this.adminStatus = d.getBoolean("adminStatus");
+        this.views=0;
     }
 
-    public String getUserID() {
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public int getViews() {
+        return views;
+    }
+    
+      public String getUserID() {
         return userID;
     }
 
@@ -115,6 +117,6 @@ public class User implements Serializable{
         this.adminStatus = adminStatus;
     }
     
-    
+
 
 }

@@ -25,6 +25,8 @@ public class UserOverviewTable extends TableView<User> {
         super();
         TableColumn Username = new TableColumn("UserID");
         Username.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        TableColumn views = new TableColumn("views");
+        views.setCellValueFactory(new PropertyValueFactory<>("views"));
         TableColumn FirstName = new TableColumn("firstName");
         FirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         TableColumn LastName = new TableColumn("lastName");
@@ -34,7 +36,7 @@ public class UserOverviewTable extends TableView<User> {
         TableColumn email = new TableColumn("email");
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         
-        this.getColumns().addAll(Username,FirstName,LastName,dateOfBirth,email);
+        this.getColumns().addAll(FirstName,LastName,views,dateOfBirth,email);
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
     }
@@ -45,6 +47,7 @@ public class UserOverviewTable extends TableView<User> {
         this.getItems().clear();
         this.setItems(UsersInformation);
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
     }
 
     public User getSelected() {
