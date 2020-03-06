@@ -143,7 +143,7 @@ public class UserPaneGUI extends AnchorPane {
                 filt.put("Country",country);
                 filt.put("Region", region);
                 filt.put("City", city);
-                
+                filt.put("Keyword", keyword);
                 LastUsedFilter = new HashMap<>(filt);
                 ///LastUsedFilter.put("Keyword", keyword);
 
