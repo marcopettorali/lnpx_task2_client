@@ -127,7 +127,12 @@ public class UserPaneGUI extends AnchorPane {
         SearchButton.setOnAction(e -> {
 
             String keyword = SearchBar.getText();
-            String journal = (String)NewspaperBar.getValue();
+            String journal ="";
+            if((String)NewspaperBar.getValue() != null){
+                 journal = (String)NewspaperBar.getValue();
+            }else{
+                
+            }
             String author = AuthorBar.getText();
             String topic = TopicBar.getText();
             String country ="";
