@@ -156,6 +156,21 @@ public abstract class ConnectionToServer {
         
     }
     
+    public static void sendDeletedUser(String username){
+        
+        String handshake = "DELETE_USER";
+        try{
+            //we are sending the string used to communicate to the server the delection of a user
+            dos.writeUTF(handshake);
+            //Now we are sending to the server the onject which contains the users that has to be deleted
+            DeleteUserMsg d = new DeleteUserMsg(username);
+            oos.writeObject(d);
+        }catch(IOException io){
+            System.out.println(io.getMessage());
+        }
+        
+    }
+    
     public static void sendUserListRequest(){
         
          String handshake = "CLIENTS";

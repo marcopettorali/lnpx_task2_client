@@ -49,6 +49,13 @@ public class UserOverviewTable extends TableView<User> {
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
     }
+    
+    public void removeItem(User u){
+        
+        UsersInformation.remove(u);
+        this.setItems(UsersInformation);
+        this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
 
     public User getSelected() {
         return this.getSelectionModel().getSelectedItem();

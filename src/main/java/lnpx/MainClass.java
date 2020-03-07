@@ -120,6 +120,10 @@ public class MainClass extends Application {
         ConnectionToServer.sendUserListRequest();
 
     }
+    
+    public static void deleteUser(User u){
+        ConnectionToServer.sendDeletedUser(u.getUserID());
+    }
 
     public static void loadAdminStage() {
 

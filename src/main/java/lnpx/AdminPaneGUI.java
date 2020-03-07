@@ -22,6 +22,7 @@ public class AdminPaneGUI extends AnchorPane {
     protected static Separator separator0;
     protected static Label infouserLabel;
     protected static UserOverviewTable infoUserTable;
+    protected static Button deleteUserButton;
     protected static Label IntroLabel;
     protected static Label SitesLabel;
     protected static CheckBox OptionRepubblica;
@@ -43,6 +44,26 @@ public class AdminPaneGUI extends AnchorPane {
         
     }
     
+    private void buildDeleteUserButton(){
+        
+        deleteUserButton.setLayoutX(22);
+        deleteUserButton.setLayoutY(303);
+        deleteUserButton.setPrefHeight(25);
+        deleteUserButton.setPrefWidth(84);
+        deleteUserButton.setMnemonicParsing(false);
+        deleteUserButton.setText("Delete User");
+        
+        deleteUserButton.setOnAction(e -> {
+           
+            User u = infoUserTable.getSelected();
+            if(u != null){    
+                MainClass.deleteUser(u);
+                infoUserTable.relaseSelection();
+                infoUserTable.removeItem(u);
+            }
+        });
+        
+    }
     
     private void buildUpdateSitesButton() {
 
@@ -153,6 +174,7 @@ public class AdminPaneGUI extends AnchorPane {
         ScrapeNowButton = new Button();
         ErrorScrapePeriod = new Label();
         ErrorSites = new Label();
+        deleteUserButton = new Button();
 
         setId("AnchorPane");
         setPrefHeight(480.0);
@@ -182,10 +204,12 @@ public class AdminPaneGUI extends AnchorPane {
         infouserLabel.setFont(new Font("System Bold", 12.0));
 
         infoUserTable.setLayoutX(22.0);
-        infoUserTable.setLayoutY(62.0);
+        infoUserTable.setLayoutY(48.0);
         infoUserTable.setPrefHeight(248.0);
         infoUserTable.setPrefWidth(296.0);
-
+        
+        buildDeleteUserButton();
+        
         IntroLabel.setLayoutX(280.0);
         IntroLabel.setLayoutY(6.0);
         IntroLabel.setPrefHeight(17.0);
