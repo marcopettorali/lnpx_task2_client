@@ -294,6 +294,7 @@ public class AdminPaneGUI extends AnchorPane {
         getChildren().add(minuteLabel);
         getChildren().add(ScrapePeriodButton);
         getChildren().add(ScrapeNowButton);
+        getChildren().add(deleteUserButton);
 
     }
 }
