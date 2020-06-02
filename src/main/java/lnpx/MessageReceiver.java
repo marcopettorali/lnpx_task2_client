@@ -97,7 +97,7 @@ public class MessageReceiver extends Thread {
             System.out.println(cfe.getMessage());
         }
         final List<Article> articlesExtracted;
-        if(res.getArticles()!=null){
+        if(res!=null){
             articlesExtracted = res.getArticles();
             Platform.runLater(() -> (UserPaneGUI.addRecommendedResults(articlesExtracted)));
         }
@@ -144,7 +144,7 @@ public class MessageReceiver extends Thread {
         } catch (ClassNotFoundException cfe) {
             System.out.println(cfe.getMessage());
         }
-        if(msg.getMessage()!=null)
+        if(msg!=null)
             System.out.println(msg.getMessage());
 
     }
